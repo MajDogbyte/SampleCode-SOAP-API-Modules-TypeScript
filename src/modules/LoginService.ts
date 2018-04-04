@@ -1,23 +1,32 @@
 import * as parseString from 'xml2js';
 
 export class LoginService {
-    public Authenticate(customerAccessKey: string, password: string, username: string, userAccessKey: string): string {
-        const authenticate: string = '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing">\n' +
-            '\t<s:Header>\n' +
-            '\t\t<a:Action s:mustUnderstand="1"> http://www.ultipro.com/services/loginservice/ILoginService/Authenticate </a:Action>\n' +
-            '\t\t<h:ClientAccessKey xmlns: h = "http://www.ultipro.com/services/loginservice"> ' + customerAccessKey + '</h:ClientAccessKey>\n' +
-            '\t\t<h:Password xmlns: h="http://www.ultipro.com/services/loginservice">' + password + '</h:Password>\n' +
-            '\t\t<h:UserAccessKey xmlns: h="http://www.ultipro.com/services/loginservice"> ' + userAccessKey + '</h:UserAccessKey>\n' +
-            '\t\t<h:UserName xmlns: h="http://www.ultipro.com/services/loginservice">' + username + '</h:UserName>\n' +
-            '\t</s:Header>\n' +
-            '\t<s:Body>\n' +
-            '\t\t<TokenRequest xmlns="http://www.ultipro.com/contracts"/>\n' +
-            '\t</s:Body>\n' +
-            '</s:Envelope>';
-        return authenticate;
+    public static EndpointPath(): string {
+        return '/services/LoginService';
     }
 
-    public GetLoginToken(xmlResponse: string): Promise<string> {
+    public static Authenticate(customerAPIKey: string, password: string, username: string, userAPIKey: string): string {
+        const authRequestXML: string = '<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://www.w3.org/2005/08/addressing">\n'
+            + '<s:Header>\n'
+            + '<a:Action s:mustUnderstand="1">http://www.ultipro.com/services/loginservice/ILoginService/Authenticate</a:Action>\n'
+            + '<h:ClientAccessKey xmlns:h="http://www.ultipro.com/services/loginservice">' + customerAPIKey
+            + '</h:ClientAccessKey>\n'
+            + '<h:Password xmlns:h="http://www.ultipro.com/services/loginservice">' + password
+            + '</h:Password>\n'
+            + '<h:UserAccessKey xmlns:h="http://www.ultipro.com/services/loginservice">' + userAPIKey
+            + '</h:UserAccessKey>\n'
+            + '<h:UserName xmlns:h="http://www.ultipro.com/services/loginservice">' + username
+            + '</h:UserName>\n'
+            + '</s:Header>\n'
+            + '<s:Body>\n'
+            + '<TokenRequest xmlns="http://www.ultipro.com/contracts"/>\n'
+            + '</s:Body>\n'
+            + '</s:Envelope>';
+
+        return authRequestXML;
+    }
+
+    public static GetLoginToken(xmlResponse: string): Promise<string> {
 
         return new Promise<string>((resolve, reject) => {
             parseString.parseString(xmlResponse, (err, result) => {
