@@ -1,0 +1,21 @@
+{
+  "name": "SampleCode-SOAP-API-Modules-TypeScript",
+  "description": "Access UltiPro SOAP Services via Typescript",
+  "license": "MIT",
+  "author": "Bryce Deneen",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UltimateSoftware/"
+  },
+  "scripts": {
+    "start": "nodemon dist/index.js",
+    "test": "mocha --require ts-node/register test/**/*.spec.ts"
+  },
+  "dependencies": {
+    "xml2js": "~0.4.19",
+    "promise": "~8.0.1",
+    "@types/promise": "~7.1.30",
+    "@types/xml2js": "~0.4.2"
+  }
+}
