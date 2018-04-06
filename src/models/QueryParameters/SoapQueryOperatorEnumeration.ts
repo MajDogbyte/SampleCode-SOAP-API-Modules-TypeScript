@@ -1,0 +1,13 @@
+export enum SoapQueryOperatorEnumeration {
+    EQUALTO,
+    NOTEQUALTO,
+    GREATERTHAN,
+    GREATERTHANOREQUAL,
+    LESSTHAN,
+    LESSTHANOREQUAL,
+    RANGEOFDATA,
+    IN,
+    STARTSWITH,
+    ENDSWITH,
+    LIKE
+}
